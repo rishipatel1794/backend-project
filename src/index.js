@@ -5,7 +5,15 @@ dotenv.config({
     path: "./env",
 });
 
-connectDB();
+connectDB()
+    .then(() => {
+        app.listen(process.env.port || 8000, () => {
+            console.log(`App is listening on ${process.env.PORT}`);
+        });
+    })
+    .catch((err) => {
+        console.log(`Mongodb connection failed`);
+    });
 
 /*
 import express from "express";
